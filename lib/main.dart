@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_route/categories_screen.dart';
+import 'package:flutter_route/screens/categories_screen.dart';
+import 'package:flutter_route/screens/category_meals_screen.dart';
+import 'package:flutter_route/screens/filters_screen.dart';
+import 'package:flutter_route/screens/meal_detail_screen.dart';
+import './screens/tabs_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +30,24 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: CategoriesScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (ctx) => TabsScreen(),
+        CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
+        Filtercreen.routeName: (ctx) => Filtercreen(),
+      },
+      onGenerateRoute: (settings) {
+        print(settings.arguments);
+        return MaterialPageRoute(
+          builder: (ctx) => CategoriesScreen(),
+        );
+      },
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (ctx) => CategoriesScreen(),
+        );
+      },
     );
   }
 }
@@ -45,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ы'),
+        title: Text('Meals'),
       ),
       body: Center(
         child: Text('э'),
